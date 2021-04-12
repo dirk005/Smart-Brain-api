@@ -24,10 +24,10 @@ if (process.env.NODE_ENV == "development") {
     },
   };
 }
-console.log(connectingString);
+
 const db = knex({
   client: "pg",
-  connectionString: connectingString,
+  connection: connectingString,
 });
 
 const PORT = process.env.PORT || 3000;
