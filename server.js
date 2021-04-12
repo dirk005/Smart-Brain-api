@@ -24,7 +24,7 @@ if (process.env.NODE_ENV == "development") {
     },
   };
 }
-
+console.log(connectingString);
 const db = knex({
   client: "pg",
   connectionString: connectingString,
