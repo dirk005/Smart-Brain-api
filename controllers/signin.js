@@ -10,7 +10,7 @@ if (process.env.NODE_ENV == "development") {
   redisURI = process.env.REDIS_TLS_URL;
 }
 
-const redisClient = redis.createClient(process.env.REDIS_URI);
+const redisClient = redis.createClient(redisURI);
 
 const signToken = (username) => {
   const jwtPayload = { username };
