@@ -17,12 +17,17 @@ const db = knex({
   connection: process.env.POSTGRES_URI,
 });
 
+const PORT = process.env.PORT || 3000;
+
 const app = express();
 
 app.use(morgan("combined"));
 app.use(cors());
 app.use(bodyParser.json());
 
+app.get("/", (req, res) => {
+  res.send("it is working");
+});
 app.post("/signin", signin.signinAuthentication(db, bcrypt));
 app.post("/register", (req, res) => {
   register.handleRegister(req, res, db, bcrypt);
@@ -40,6 +45,6 @@ app.post("/imageurl", auth.requireAuth, (req, res) => {
   image.handleApiCall(req, res);
 });
 
-app.listen(3000, () => {
-  console.log("app is running on port 3000");
+app.listen(PORT, () => {
+  console.log(`app is running on port ${PORT}`);
 });
