@@ -11,20 +11,6 @@ const profile = require("./controllers/profile");
 const image = require("./controllers/image");
 const auth = require("./controllers/authorization");
 
-// Allow access to origin
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, PATCH, DELETE, OPTIONS"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Authorization, Accept"
-  );
-  next();
-});
-
 // Database Setup - add your own information here based on the DB you created
 let connectingString = "";
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
@@ -51,6 +37,20 @@ const app = express();
 app.use(morgan("combined"));
 // app.use(cors());
 app.use(bodyParser.json());
+
+// Allow access to origin
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Authorization, Accept"
+  );
+  next();
+});
 
 app.get("/", (req, res) => {
   res.send("it is working");
