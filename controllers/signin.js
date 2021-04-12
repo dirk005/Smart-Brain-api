@@ -7,7 +7,7 @@ let redisURI = "";
 if (process.env.NODE_ENV == "development") {
   redisURI = process.env.REDIS_URI;
 } else {
-  redisURI = process.env.REDIS_TLS_URL;
+  redisURI = process.env.REDIS_URL;
 }
 
 const redisClient = redis.createClient(redisURI);
