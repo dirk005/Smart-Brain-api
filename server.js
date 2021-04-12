@@ -12,9 +12,22 @@ const image = require("./controllers/image");
 const auth = require("./controllers/authorization");
 
 // Database Setup - add your own information here based on the DB you created
+let connectingString = "";
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
+if (process.env.NODE_ENV == "development") {
+  connectingString = process.env.POSTGRES_URI;
+} else {
+  connectingString = {
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  };
+}
+
 const db = knex({
   client: "pg",
-  connection: process.env.POSTGRES_URI,
+  connectionString: connectingString,
 });
 
 const PORT = process.env.PORT || 3000;
